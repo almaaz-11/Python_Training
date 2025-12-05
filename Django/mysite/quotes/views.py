@@ -1,4 +1,10 @@
-from django.http import HttpResponse
+from django.shortcuts import render
 
 def home(request):
-    return HttpResponse("<h1>Quote of the Day</h1><p>Stay hungry, stay foolish!</p>")
+    return render(request, 'quotes/home.html')
+
+def passing_data(request):
+    context = {
+        "username": "Almaaz"
+    }
+    return render(request, 'quotes/passing_data.html', context)
