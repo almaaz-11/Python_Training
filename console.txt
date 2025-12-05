@@ -1,0 +1,288 @@
+Python 3.14.1 (tags/v3.14.1:57e0d17, Dec  2 2025, 14:05:07) [MSC v.1944 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 2+4
+6
+>>> print "hello"
+  File "<python-input-1>", line 1
+    print "hello"
+>>> user_name = "Almaaz"
+>>> print(user_name)
+Almaaz
+>>> MAX_USER = 100
+>>> print(MAX_USER)
+100
+>>> age: int = 25
+>>> age = "almaaz"
+>>> print(age)
+almaaz
+>>> text: str = "Almaaz Ahmed"
+>>> print(text)
+Almaaz Ahmed
+>>> multi_line: str = """Almaaz
+... is my name.
+... What is your name?"""
+>>> print(multi_line)
+Almaaz
+is my name.
+What is your name?
+>>> value = None
+>>> print(value)
+None
+>>> type(None)
+<class 'NoneType'>
+>>> type(10)
+<class 'int'>
+>>> type(10 + 3j)
+<class 'complex'>
+>>> type(True)
+<class 'bool'>
+>>> name: str = "Almaaz"
+>>> age: int = 24
+>>> print(f"user_name: {name}, age: {age}")
+user_name: Almaaz, age: 24
+>>> fruits: list[str] = ['apple', 'orange', 'banana']
+>>> pritn(fruits)
+Traceback (most recent call last):
+  File "<python-input-27>", line 1, in <module>
+    pritn(fruits)
+    ^^^^^
+NameError: name 'pritn' is not defined. Did you mean: 'print'?
+>>> fruits
+['apple', 'orange', 'banana']
+>>> numbers: list[int] = [1,2,3,4,5]
+>>> numbers
+[1, 2, 3, 4, 5]
+>>> mixed: list = ['apple', 1, 3.14, True]
+>>> mixed
+['apple', 1, 3.14, True]
+>>> fruits.append('kiwi')
+>>> fruits
+['apple', 'orange', 'banana', 'kiwi']
+>>> fruits.insert(1, 'Dragon Fruit')
+>>> fruits
+['apple', 'Dragon Fruit', 'orange', 'banana', 'kiwi']
+>>> fruits.remove('kiwi')
+>>> fruits
+['apple', 'Dragon Fruit', 'orange', 'banana']
+>>> first = fruits.pop(0)
+>>> first
+'apple'
+>>> first = fruits.pop(3)
+Traceback (most recent call last):
+  File "<python-input-41>", line 1, in <module>
+    first = fruits.pop(3)
+IndexError: pop index out of range
+>>> first = fruits.pop(2)
+>>> first
+'banana'
+>>> fruits
+['Dragon Fruit', 'orange']
+>>> squares = [x ** 2 for x in range(10)]
+>>> squares
+[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+>>> evens = [x for x in range(20) if x % 2 == 0]
+>>> evens
+[0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+>>> prices: list[int] = [100,200,300]
+>>> discounts = [p * 0.9 for p in prices]
+>>> discounts
+[90.0, 180.0, 270.0]
+>>> users = [{"name":"almaaz", "age":24}, {"name":"Ahmed", "age":23}]
+>>> names = [user[name] for user in users]
+Traceback (most recent call last):
+  File "<python-input-53>", line 1, in <module>
+    names = [user[name] for user in users]
+             ~~~~^^^^^^
+KeyError: 'Almaaz'
+>>> names = [user["name"] for user in users]
+>>> names
+['almaaz', 'Ahmed']
+>>> fruits
+['Dragon Fruit', 'orange']
+>>> first_letter = [w[0] for w in fruits]
+>>> first_letter
+['D', 'o']
+>>> tuple
+<class 'tuple'>
+>>> coordinates: tuple = (10,20,30)
+>>> coordinates
+(10, 20, 30)
+>>> type(coordinates)
+<class 'tuple'>
+>>> single_item = (1)
+>>> type(single_item
+... )
+<class 'int'>
+>>> type(single_item)
+<class 'int'>
+>>> single_item = (1,)
+>>> type(single_item)
+<class 'tuple'>
+>>> user_info = ("Almaaz", 23, "almaaz@gmail.com")
+>>> name, age, email = user_info
+>>> print(name)
+Almaaz
+>>> print(age)
+23
+>>> print(email)
+almaaz@gmail.com
+>>> location_map = {
+... (0,0): "origin",
+... (1,1): "diagonal"}
+>>> location_map
+{(0, 0): 'origin', (1, 1): 'diagonal'}
+>>> user: dict = {
+... "name":"Almaaz",
+... "age":24,
+... "email":'almaaz@gmail.com"
+... "is_Active":True
+... }
+... ^Z
+KeyboardInterrupt
+>>> user: dict = {
+... "name": "Almaaz",
+... "age":24,
+... "email":"almaaz@gmail.com"
+... "is_active":True
+... }
+...
+KeyboardInterrupt
+>>> user: dict = {
+...     "name": "Alice",
+...     "age": 25,
+...     "email": "alice@example.com",
+...     "is_active": True
+... }
+>>> user
+{'name': 'Alice', 'age': 25, 'email': 'alice@example.com', 'is_active': True}
+>>> name = user.name
+Traceback (most recent call last):
+  File "<python-input-77>", line 1, in <module>
+    name = user.name
+           ^^^^^^^^^
+AttributeError: 'dict' object has no attribute 'name'
+>>> print(user.get('name'))
+Alice
+>>> user['status'] = 'verified'
+>>> user
+{'name': 'Alice', 'age': 25, 'email': 'alice@example.com', 'is_active': True, 'status': 'verified'}
+>>> company: dict = {
+...     "name": "Error",
+...     "employee": [
+...         {"id":1, "name":"Almaaz", "role":"developer"}
+...         {"id":2, "name":"Saurabh", "role": "developer"}
+...     ],
+...     "location": "Work From Home"
+... }
+...
+  File "<python-input-81>", line 4
+    {"id":1, "name":"Almaaz", "role":"developer"}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+>>>
+>>> company: dict = {
+...     "name": "Error",
+...     "employee": [
+...         {"id":1, "name":"Almaaz", "role":"developer"},
+...         {"id":2, "name":"Saurabh", "role": "developer"}
+...     ],
+...     "location": "Work From Home"
+... }
+>>>
+>>> for key, value in user.items():
+...     print(f"{key}: {value}")
+...
+name: Alice
+age: 25
+email: alice@example.com
+is_active: True
+status: verified
+>>> for key in user.items():
+...     print(f"{key}: {value}")
+...
+('name', 'Alice'): verified
+('age', 25): verified
+('email', 'alice@example.com'): verified
+('is_active', True): verified
+('status', 'verified'): verified
+>>> for key in user.items():
+...     print(f"{value}")
+...
+verified
+verified
+verified
+verified
+verified
+>>> unique_ids: set = {1,2,3,4}
+>>> unique_ids
+{1, 2, 3, 4}
+>>> type(unique_ids
+... )
+<class 'set'>
+>>> ids = [1,2,3,3,4,4,5,6]
+>>> unique_ids = list(set(ids))
+>>> unique_ids
+[1, 2, 3, 4, 5, 6]
+>>> set_a = {1,2,3,4}
+>>> set_b = {3,4,5,6}
+>>>
+>>> union = set_a | set_b
+>>> union
+{1, 2, 3, 4, 5, 6}
+>>> insertersection = set_a & set_b
+>>> insertersection
+{3, 4}
+>>> difference = set_a - set_b
+>>> difference
+{1, 2}
+>>> difference = set_b - set_a
+>>> difference
+{5, 6}
+>>> age = 25
+>>> is_adult = age >= 18
+>>> is_senior = age >= 65
+>>> is_adult
+True
+>>> is_senior
+False
+>>> def greet(name: str, greeting: str: "hello")
+  File "<python-input-110>", line 1
+    def greet(name: str, greeting: str: "hello")
+                                      ^
+SyntaxError: invalid syntax
+>>> def greet(name: str, greeting: str: "hello"):
+  File "<python-input-111>", line 1
+    def greet(name: str, greeting: str: "hello"):
+                                      ^
+SyntaxError: invalid syntax
+>>> def greet(name: str, greeting: str= "hello"):
+...     print(f"{greeting}, {name}")
+...
+>>> def greet(name: str, greeting: str= "hello"):
+...     print(f"{greeting}, {name}")
+...     return
+...
+>>> greet("Almaaz")
+hello, Almaaz
+>>> greet("Almaaz", "Hi")
+Hi, Almaaz
+>>> def sum_all(*numbers):
+...     total = 0
+...     for num in numbers:
+...         total += num
+...
+>>> def sum_all(*numbers):
+...     total = 0
+...     for num in numbers:
+...         total += num
+...     return total
+...
+>>> print(sum_all(1,2,3,4)
+... )
+10
+>>> print(sum_all(1,2,3,4,5))
+15
+>>> add = lambda a,b : a+b
+>>> add(5,9)
+14
+>>>
