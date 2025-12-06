@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Blog List</title>
+</head>
+<body>
+
+    <h1>All Blog Posts</h1>
+    <p>
+        <a href="{% url 'post_create' %}">
+            <button>Add New Blog</button>
+        </a>
+    </p>
+
+    <hr>
+    {% if posts %}
+        {% for post in posts %}
+            <div style="margin-bottom: 20px;">
+                
+                <h2>{{ post.title }}</h2>
+
+                <p>
+                    {{ post.content|truncatechars:150 }}
+                </p>
+
+                <small>
+                    Created: {{ post.created_at }}
+                </small>
+
+                <br><br>
+                <a href="{% url 'post_detail' post.pk %}">
+                    <button>View</button>
+                </a>
+
+                <a href="{% url 'post_update' post.pk %}">
+                    <button>Edit</button>
+                </a>
+
+                <a href="{% url 'post_delete' post.pk %}">
+                    <button>Delete</button>
+                </a>
+
+            </div>
+            <hr>
+        {% endfor %}
+    {% else %}
+        <p>No blog posts available.</p>
+    {% endif %}
+
+</body>
+</html>

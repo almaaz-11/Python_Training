@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{ post.title }}</title>
+</head>
+<body>
+    <h1>{{ post.title }}</h1>
+    <p><small>Created: {{ post.created_at }} | Updated: {{ post.updated_at }}</small></p>
+    <p>{{ post.content }}</p>
+
+    <hr>
+
+    <p>
+        <a href="{% url 'post_list' %}">← Back to all posts</a> |
+        <a href="{% url 'post_update' pk=post.pk %}">Edit</a> |
+        <a href="{% url 'post_delete' pk=post.pk %}">Delete</a>
+    </p>
+</body>
+</html>
