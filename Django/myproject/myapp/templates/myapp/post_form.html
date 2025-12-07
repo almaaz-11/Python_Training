@@ -1,0 +1,72 @@
+<!-- myapp/templates/myapp/post_form.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <style>
+        body { font-family: Arial; max-width: 600px; margin: 50px auto; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; }
+        input, textarea { width: 100%; padding: 8px; border: 1px solid #ddd; }
+        input:focus, textarea:focus { border-color: #007bff; outline: none; }
+        .error { color: red; font-size: 0.9em; margin-top: 5px; }
+        .success { color: green; margin-bottom: 20px; }
+        button { background: #007bff; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+        button:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+    <h1>{{ title }}</h1>
+    
+    {% if messages %}
+        <!-- Display success messages -->
+        {% for message in messages %}
+            <div class="success">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+    
+    <!-- Form starts here -->
+    <form method="POST">
+        <!-- CSRF token - security protection against attacks -->
+        {% csrf_token %}
+        <!-- What: Prevents Cross-Site Request Forgery attacks
+             Why: Django security requirement for all POST forms -->
+        
+        <!-- Render form fields -->
+        {% for field in form %}
+            <!-- Skip hidden fields (rendered separately) -->
+            {% if field.field.widget.input_type != 'hidden' %}
+                <div class="form-group">
+                    <!-- Show label -->
+                    {{ field.label_tag }}
+                    
+                    <!-- Show input field -->
+                    {{ field }}
+                    
+                    <!-- Show validation errors if any -->
+                    {% if field.errors %}
+                        <div class="error">
+                            {% for error in field.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endfor %}
+        
+        <!-- Show non-field errors (from clean() method) -->
+        {% if form.non_field_errors %}
+            <div class="error">
+                {% for error in form.non_field_errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        
+        <!-- Submit button -->
+        <button type="submit">Save</button>
+        <a href="/">Cancel</a>
+    </form>
+</body>
+</html>
