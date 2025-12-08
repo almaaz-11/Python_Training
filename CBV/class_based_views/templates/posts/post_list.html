@@ -1,4 +1,4 @@
-<h1>All Posts</h1>
+{% comment %} <h1>All Posts</h1>
 
 <ul>
 {% for post in posts %}
@@ -11,4 +11,25 @@
         </a>
     </li>
 {% endfor %}
+</ul> {% endcomment %}
+
+<h1>All Posts</h1>
+
+{% if user.is_authenticated %}
+    <p>Hi, {{ user.username }} | <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form></p>
+{% else %}
+    <p><a href="{% url 'login' %}">Login</a></p>
+{% endif %}
+
+<ul>
+    {% for post in posts %}
+        <li>
+            <a href="{% url 'post_detail' post.pk %}">
+                {{ post.title }}
+            </a>
+        </li>
+    {% endfor %}
 </ul>

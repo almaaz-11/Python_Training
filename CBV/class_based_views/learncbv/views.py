@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Post
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 # from django.views import View
 # from django.http import HttpResponse
 
@@ -37,11 +38,14 @@ class PostDetailView(DetailView):
     template_name = 'posts/post_detail.html'
     context_object_name = 'post'
 
-class PostCreateView(CreateView):
+class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     fields = ['title', 'content']
     template_name = 'posts/post_form.html'
     success_url = reverse_lazy('post_list')
+
+    login_url = 'login'
+    redirect_field_name = 'next'
 
 class PostUpdateView(UpdateView):
     model = Post
