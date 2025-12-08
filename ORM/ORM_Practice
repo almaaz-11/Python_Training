@@ -1,0 +1,192 @@
+(venv) D:\python_training\Day_1\ORM\ORM>python manage.py shell
+13 objects imported automatically (use -v 2 for details).
+
+Python 3.14.1 (tags/v3.14.1:57e0d17, Dec  2 2025, 14:05:07) [MSC v.1944 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from products.model import Product 
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+ModuleNotFoundError: No module named 'products.model'
+>>> from products.models import Product 
+>>> Product.object.create(
+... name="Iphone 15",
+... price="79999.50",
+... stock=10
+... )
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: type object 'Product' has no attribute 'object'. Did you mean: 'objects'?
+>>> Product.objects.create(
+... name="Iphone 15", 
+... price=79999.50,        
+... stock=10
+... )
+<Product: Iphone 15>
+>>> Product.objects.create(name="Mouse",price=1000,stock=10,is_active=False)
+<Product: Mouse>
+>>> Product.objects.create(name="Keyboard",price=1500,stock=5,is_active=True)
+<Product: Keyboard>
+>>> Product.objects.all()
+<QuerySet [<Product: Iphone 15>, <Product: Mouse>, <Product: Keyboard>]>
+>>> Product.objects.all()
+<QuerySet [<Product: Iphone 15>, <Product: Mouse>, <Product: Keyboard>]>
+>>> Product.objects.all()
+<QuerySet [<Product: Iphone 15>, <Product: Mouse>, <Product: Keyboard>]>
+>>> Product.objects.filter(is_active=True)
+<QuerySet [<Product: Iphone 15>, <Product: Keyboard>]>
+>>> Product.objects.filter(stock__gt=5)
+<QuerySet [<Product: Iphone 15>, <Product: Mouse>]>
+>>> Product.objects.get(id=1)
+<Product: Iphone 15>
+>>> Product.objects.get(id=4) 
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "D:\python_training\Day_1\ORM\venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\python_training\Day_1\ORM\venv\Lib\site-packages\django\db\models\query.py", line 639, in get
+    raise self.model.DoesNotExist(
+        "%s matching query does not exist." % self.model._meta.object_name
+    )
+products.models.Product.DoesNotExist: Product matching query does not exist.
+>>> product = Product.objects.get(name="Mouse")
+>>> product.price = 749.00
+>>> product.save()
+>>> Product.objects.get(name="Mouse")
+<Product: Mouse>
+>>> product = Product.objects.get(name="Mouse")
+>>> product.price
+Decimal('749.00')
+>>> Product.objects.create(
+... name="Casio Watch"
+... price=10000.00
+  File "<console>", line 1
+    Product.objects.create(
+                          ^
+SyntaxError: '(' was never closed
+>>> Product.objects.create(
+... name="Casio Watch"      
+... name="Casio Watch"
+  File "<console>", line 1
+    Product.objects.create(
+                          ^
+SyntaxError: '(' was never closed
+>>> Product.objects.create(
+... name="Casio Watch",     
+... price=10000.00
+... ,      
+... stock=3,
+... is_active=True)
+<Product: Casio Watch>
+>>> Product.objects.all()
+<QuerySet [<Product: Iphone 15>, <Product: Mouse>, <Product: Keyboard>, <Product: Casio Watch>]>
+>>> Product.objects.filter(is_active=True)
+<QuerySet [<Product: Iphone 15>, <Product: Keyboard>, <Product: Casio Watch>]>
+>>> Product.objects.filter(is_active=False)
+<QuerySet [<Product: Mouse>]>
+>>> Product.objects.filter(stock__lt=5)     
+<QuerySet [<Product: Casio Watch>]>
+>>> Product.objects.exclude(is_active=True)
+<QuerySet [<Product: Mouse>]>
+>>> Product.objects.order_by('price')
+<QuerySet [<Product: Mouse>, <Product: Keyboard>, <Product: Casio Watch>, <Product: Iphone 15>]>
+>>> Product.objects.order_by('-price') 
+<QuerySet [<Product: Iphone 15>, <Product: Casio Watch>, <Product: Keyboard>, <Product: Mouse>]>
+>>> Product.objects.filter(is_active=True).order_by('price')
+<QuerySet [<Product: Keyboard>, <Product: Casio Watch>, <Product: Iphone 15>]>
+>>> Product.objects.values('name'.'price')
+  File "<console>", line 1
+    Product.objects.values('name'.'price')
+                                  ^^^^^^^
+SyntaxError: invalid syntax
+>>> Product.objects.values('name','price') 
+<QuerySet [{'name': 'Iphone 15', 'price': Decimal('79999.50')}, {'name': 'Mouse', 'price': Decimal('749.00')}, {'name': 'Keyboard', 'price': Decimal('1500.00')}, {'name': 'Casio Watch', 'price': Decimal('10000.00')}]>
+>>> Product.objects.delete()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'Manager' object has no attribute 'delete'
+>>> product = Product.objects.all()
+>>> product.delete()
+(4, {'products.Product': 4})
+>>> Product.objects.all()           
+<QuerySet []>
+>>> from .models import Product, Category
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+KeyError: "'__name__' not in globals"
+>>> from products.models import Product, Category
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+ImportError: cannot import name 'Category' from 'products.models' (D:\python_training\Day_1\ORM\ORM\products\models.py)
+>>>
+KeyboardInterrupt
+>>>
+KeyboardInterrupt
+>>>
+KeyboardInterrupt
+>>> quit
+Use quit() or Ctrl-Z plus Return to exit
+>>> quit()
+now exiting InteractiveConsole...
+
+(venv) D:\python_training\Day_1\ORM\ORM>python manage.py shell
+14 objects imported automatically (use -v 2 for details).
+
+Python 3.14.1 (tags/v3.14.1:57e0d17, Dec  2 2025, 14:05:07) [MSC v.1944 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from products.models import Product, Category
+>>> electronics = Category.objects.create(name="Electronics")
+>>> fashion = Category.objects.create(name="Fashion")
+>>>
+>>> Product.objects.create(
+... name="Iphone"
+... ,price=79999,
+... stock=10,
+... category=electronics 
+... )
+<Product: Iphone>
+>>> Product.objects.create(
+... name="Mouse",
+... price=1000,
+... stock=5,
+... category=electronics
+... )
+<Product: Mouse>
+>>> Product.objects.create(
+... name="T-Shirt",
+... price=2000,
+... stock=7,
+... category=fashion
+... )
+<Product: T-Shirt>
+>>> electronics.product.all()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'Category' object has no attribute 'product'. Did you mean: 'products'?
+>>> electronics.products.all()
+<QuerySet [<Product: Iphone>, <Product: Mouse>]>
+>>> electronics.product_set.all() 
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'Category' object has no attribute 'product_set'. Did you mean: 'products'?
+>>> category.product_set.all()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'category' is not defined. Did you mean: 'Category'?
+>>> Category.product_set.all() 
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: type object 'Category' has no attribute 'product_set'. Did you mean: 'products'?
+>>> category.product_set.all()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'category' is not defined. Did you mean: 'Category'?
+>>> Category.objects.all()
+<QuerySet [<Category: Electronics>, <Category: Fashion>]>
+>>> electronics.products.all()
+<QuerySet [<Product: Iphone>, <Product: Mouse>]>
+>>> Product.objects.filter(category__name="Fashion")
+<QuerySet [<Product: T-Shirt>]>
+>>>
