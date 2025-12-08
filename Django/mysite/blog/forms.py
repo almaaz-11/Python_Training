@@ -1,7 +1,7 @@
 from django import forms
-from .models import Post   # make sure Post model exists in models.py
+from .models import Post
 
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ["title", "content"]   # adjust based on your Post model fields
+        fields = ["title", "content"]
