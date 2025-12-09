@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        {% if object and object.pk %}
+            Edit Post
+        {% else %}
+            New Post
+        {% endif %}
+    </title>
+</head>
+<body>
+    <h1>
+        {% if object and object.pk %}
+            Edit Post
+        {% else %}
+            New Post
+        {% endif %}
+    </h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">
+            {% if object and object.pk %}
+                Save changes
+            {% else %}
+                Create post
+            {% endif %}
+        </button>
+    </form>
+
+    <p>
+        <a href="{% url 'blog:post_list' %}">Back to all posts</a>
+    </p>
+</body>
+</html>
